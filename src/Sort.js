@@ -4,7 +4,7 @@ export default class Sort extends Component {
     render() {
         return (
             <div>
-                <select onChange={this.props.dropdown}>
+                <select >
                     <option value=''>Show All</option>
                     <option value=''>Ascending Order</option>
                     <option value=''>Descending</option>
@@ -13,3 +13,6 @@ export default class Sort extends Component {
         )
     }
 }
+
+// onChange={this.props.dropdown}
+// onChange={this.props.dropdown}

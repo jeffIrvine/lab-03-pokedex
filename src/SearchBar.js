@@ -2,12 +2,22 @@ import React, { Component } from 'react'
 
 export default class SearchBar extends Component {
     render() {
+        // submit a state in App.js search term
+        // then write a function that will update state handle search term in the App.js
+        // passed down as a prop to SearchBar to be used in form 
+        // then search term piece of state will be passed down to your poke list where the filtering lives
+        // 
         return (
             <div className='search-bar'>
-                <p> Sort by Pokemon Name 
-                <input className='input' />
-                <button className='submit-button'>Submit</button>
-                </p>
+                <form>
+                    <p> Sort by Pokemon Name 
+                        <input className='input' 
+                        type='text' 
+                        onChange={this.props.handleChange}
+                        />
+                        <button onClick={this.props.handleSubmit}className='submit-button'>Submit</button>
+                    </p>
+                </form>
             </div>
         )
     }
