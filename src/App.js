@@ -11,9 +11,16 @@ export default class App extends React.Component {
   state = {
     filter: '',
     sortType: '',
-    sortOrder: ''
+    sortOrder: '',
+    form: ''
   }
-  
+  handleSubmit = e => {
+    e.preventDefault();
+    this.setState({
+      form: this.state.form
+    })
+  }
+
   handleChange = e => {
     this.setState({
       filter: e.target.value
@@ -25,24 +32,30 @@ export default class App extends React.Component {
       sortType: e.target.value
     });
   }
+  handleSortOrder = e => {
+    this.setState({
+      sortOrder: e.target.value
+    });
+  }
 
   render() {
     return (
           <div>
             <Header />
-            <div className='sort-div'>
-              <SearchBar 
-              handleSubmit={this.handleSubmit}
-              handleChange={this.handleChange}
-              />
-              <Sort 
-              attack={this.attack}
-              handleSortType={this.handleSortType}
-              />
-            </div>
+            <SearchBar 
+            handleSubmit={this.handleSubmit}
+            handleChange={this.handleChange}
+            />
+            <Sort 
+            handleSortOrder={this.handleSortOrder}
+            handleSortType={this.handleSortType}
+            />
+
             <PokeList 
             pokeData={pokeData} 
             filter={this.state.filter}
+            sortOrder={this.state.sortOrder}
+            sortType={this.state.sortType}
             />
           </div>
     );

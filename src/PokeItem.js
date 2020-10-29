@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 export default class PokeItem extends Component {
     render() {
         return (
-            <div className='poke-div' key='this.props.pokeData[i]'>
+            <div className='poke-div'>
                 <div>
                 <h1>
                     {this.props.name}
@@ -17,6 +17,7 @@ export default class PokeItem extends Component {
                     Hp: {this.props.hp}
                     Attack: {this.props.attack}
                     Defense: {this.props.defense}
+                    Type: {this.props.type}
                 </p>
                 </div>
             </div>
