@@ -15,7 +15,8 @@ export default class SearchBar extends Component {
                         type='text' 
                         onChange={this.props.handleChange}
                         />
-                        <button onClick={this.props.handleSubmit}className='submit-button'>Submit</button>
+                        <button
+                        className='submit-button'>This button is a lie</button>
                     </p>
                 </form>
             </div>

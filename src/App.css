@@ -13,6 +13,15 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 
+.drop-downs {
+  width: 100%;
+  height: 100px;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .poke-div {
   border: solid 2px black;
   border-radius: 10px;
@@ -34,3 +43,4 @@
   width: 400px;
 
 }
+

@@ -10,18 +10,19 @@ import pokeData from './Data.js';
 export default class App extends React.Component {
   state = {
     filter: '',
-    form: ''
+    sortType: '',
+    sortOrder: ''
   }
-
-  handleSubmit = e => {
-    e.preventDefault();
+  
+  handleChange = e => {
     this.setState({
       filter: e.target.value
     });
   }
-  handleChange = e => {
+
+  handleSortType = e => {
     this.setState({
-      filter: e.target.value
+      sortType: e.target.value
     });
   }
 
@@ -35,14 +36,14 @@ export default class App extends React.Component {
               handleChange={this.handleChange}
               />
               <Sort 
+              attack={this.attack}
+              handleSortType={this.handleSortType}
               />
             </div>
             <PokeList 
             pokeData={pokeData} 
             filter={this.state.filter}
             />
-
-            
           </div>
     );
   }

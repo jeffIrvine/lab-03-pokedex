@@ -3,6 +3,9 @@ import PokeItem from './PokeItem.js';
 
 export default class PokeList extends Component {
     render() {
+
+
+console.log(this.props.pokeData);
         return (
             <div>
                 {   
@@ -17,8 +20,18 @@ export default class PokeList extends Component {
                         name={item.pokemon}
                         pokeImage={item.url_image}
                         hp={item.hp}
+                        attack={item.attack}
+                        defense={item.defense}
+                        pokeData={this.props.pokeData}
                         />
                     )
+
+                    .sort((a, b) => {
+                        if (this.props.sortOrder === 'ascending') {
+                            return a[this.props.sortType] - b[this.props.sortType];} else {
+                                return b[this.props.sortType] - a[this.props.sortType]
+                            }
+                    })
                 }
             </div>
         )
