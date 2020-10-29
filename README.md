@@ -1,1 +1,1 @@
-# lab-03-pokedex
+![componentHierarchy](componentHierarchy.png)
