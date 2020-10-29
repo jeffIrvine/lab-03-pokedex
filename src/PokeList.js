@@ -4,7 +4,7 @@ import PokeItem from './PokeItem.js';
 export default class PokeList extends Component {
     render() {
         return (
-            <div>
+            <div className='main'>
                 {   
                     this.props.pokeData.filter((item) => {
                         if (!this.props.filter) return true;

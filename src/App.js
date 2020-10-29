@@ -40,7 +40,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-          <div>
+          <div className="App">
             <Header />
             <SearchBar 
             handleSubmit={this.handleSubmit}
