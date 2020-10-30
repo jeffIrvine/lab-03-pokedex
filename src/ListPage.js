@@ -38,12 +38,11 @@ export default class ListPage extends Component {
     // }
 
     handleSortOrder = async (e) => {
-        this.setState({sortOrder: e.target.value});
+        await this.setState({sortOrder: e.target.value});
         await this.sortPoke()
     }
     handleSortType = async (e) => {
-        this.setState({sortType: e.target.value})
-        console.log(this.state.sortType);
+        await this.setState({sortType: e.target.value})
         await this.sortPoke()
     }
     

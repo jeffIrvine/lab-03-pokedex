@@ -10,7 +10,8 @@ export default class Sort extends Component {
                     <option value='desc'>Descending Order</option>
                 </select>
                 <select onChange={this.props.handleSortType}>
-                    <option value='attack'>Attack</option>
+                    <option value='' >Sort By</option>
+                    <option value='attack' >Attack</option>
                     <option value='defense'>Defense</option>
                     <option value='type'>Type</option>
                 </select>
