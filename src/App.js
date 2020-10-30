@@ -6,6 +6,7 @@ import {
     Switch,
 } from 'react-router-dom';
 import ListPage from './ListPage.js';
+import Main from './Main.js';
 import HomePage from './HomePage.js';
 import Header from './Header.js';
 
@@ -16,8 +17,8 @@ export default class App extends Component {
         return (
             <div>
                 <Router>
+                    <Header />
                     <Switch>
-                        <Header />
                         <Route 
                             path="/" 
                             exact
@@ -26,7 +27,7 @@ export default class App extends Component {
                         <Route 
                             path="/list" 
                             exact
-                            render={(routerProps) => <ListPage {...routerProps} />} 
+                            render={(routerProps) => <Main {...routerProps} />} 
                         />
                     </Switch>
                 </Router>

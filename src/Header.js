@@ -9,10 +9,10 @@ export default class Header extends Component {
                 Search your Pokedex!
             <ul>
                 <li>
-                <Link to='/'>Home</Link>
+                <Link to="/" >Home</Link>
                 </li>
                 <li>
-                <Link to='/list'>List</Link>
+                <Link to="/list" >List</Link>
                 </li>
             </ul>
             </div>

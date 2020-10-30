@@ -1,62 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react'
+import fetch from 'superagent'
 
-import PokeList from './PokeList.js';
-import SearchBar from './SearchBar.js';
-import Sort from './Sort.js';
-import pokeData from './Data.js';
+export default class ListPage extends Component {
+    state = {
+        pokemonData: [],
+    }
 
+    fetchPoke = async () => {
+        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.filter}&perPage=200`)
+    }
 
-export default class App extends React.Component {
-  state = {
-    filter: '',
-    sortType: '',
-    sortOrder: '',
-    form: ''
-  }
-  handleSubmit = e => {
-    e.preventDefault();
-    this.setState({
-      form: this.state.form
-    })
-  }
+    componentDidMount = async () => {
+        const response = await fetch.get('https://alchemy-pokedex.herokuapp.com/api/pokedex');
+        this.setState({pokemonData: response.body.results});
+    }
+    
+    handleClick = async (e) => {
+        e.preventDefault();
+        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex/types/${this.state.type}`)
+        this.setState({pokemonData: response.body.results });
+    }
+    
+    handleChange = (e) => {
+        this.setState({type: e.target.value});
+    }
 
-  handleChange = e => {
-    this.setState({
-      filter: e.target.value
-    });
-  }
-
-  handleSortType = e => {
-    this.setState({
-      sortType: e.target.value
-    });
-  }
-  handleSortOrder = e => {
-    this.setState({
-      sortOrder: e.target.value
-    });
-  }
-
-  render() {
-    return (
-          <div className="App">
-            
-            <SearchBar 
-            handleSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-            />
-            <Sort 
-            handleSortOrder={this.handleSortOrder}
-            handleSortType={this.handleSortType}
-            />
-
-            <PokeList 
-            pokeData={pokeData} 
-            filter={this.state.filter}
-            sortOrder={this.state.sortOrder}
-            sortType={this.state.sortType}
-            />
-          </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                
+            </div>
+        )
+    }
 }
