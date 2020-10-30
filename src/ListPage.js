@@ -8,8 +8,8 @@ export default class ListPage extends Component {
     state = {
         pokeData: [],
         filter: '',
-        sortType: 'attack',
-        sortOrder: 'asc'
+        sortType: '',
+        sortOrder: ''
     }
     
     componentDidMount = async () => {
@@ -33,9 +33,10 @@ export default class ListPage extends Component {
         await this.fetchPoke();
     }
     
-    // handleChange = (e) => {
-    //     this.setState({type: e.target.value});
-    // }
+    handleChange = async (e) => {
+        await this.setState({filter: e.target.value});
+        await this.sortPoke()
+    }
 
     handleSortOrder = async (e) => {
         await this.setState({sortOrder: e.target.value});

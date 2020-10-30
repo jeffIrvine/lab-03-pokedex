@@ -11,12 +11,12 @@ export default class PokeList extends Component {
                     .map((item) => 
                         <PokeItem
                         key= {item.id} 
-                        name={item.pokemon}
-                        pokeImage={item.url_image}
-                        hp={item.hp}
-                        attack={item.attack}
-                        defense={item.defense}
-                        type={item.type_1}
+                        name= {item.pokemon}
+                        pokeImage= {item.url_image}
+                        hp= {item.hp}
+                        attack= {item.attack}
+                        defense= {item.defense}
+                        type= {item.type_1}
                         />
                     )
                 }
