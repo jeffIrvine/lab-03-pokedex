@@ -1,34 +1,67 @@
 import React, { Component } from 'react'
-// import fetch from 'superagent'
+import DropDown from './Sort.js';
+import PokeList from './PokeList.js';
+import SearchBar from './SearchBar.js';
+import fetch from 'superagent'
 
 export default class ListPage extends Component {
     state = {
-        pokemonData: [],
+        pokeData: [],
+        filter: '',
+        sortType: 'attack',
+        sortOrder: 'asc'
+    }
+    
+    componentDidMount = async () => {
+        await this.fetchPoke();
+ 
     }
 
-    // fetchPoke = async () => {
-    //     const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.filter}&perPage=200`)
-    // }
-
-    // componentDidMount = async () => {
-    //     const response = await fetch.get('https://alchemy-pokedex.herokuapp.com/api/pokedex');
-    //     this.setState({pokemonData: response.body.results});
-    // }
-    
-    // handleClick = async (e) => {
-    //     e.preventDefault();
-    //     const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex/types/${this.state.type}`)
-    //     this.setState({pokemonData: response.body.results });
-    // }
-    
-    handleChange = (e) => {
-        this.setState({type: e.target.value});
+    fetchPoke = async () => {
+        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.filter}&perPage=1000`)
+        this.setState({pokeData: response.body.results});
     }
 
+    sortPoke = async () => {
+        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?sort=${this.state.sortType}&direction=${this.state.sortOrder}`)
+        this.setState({pokeData: response.body.results})
+    }
+
+    
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        await this.fetchPoke();
+    }
+    
+    // handleChange = (e) => {
+    //     this.setState({type: e.target.value});
+    // }
+
+    handleSortOrder = async (e) => {
+        this.setState({sortOrder: e.target.value});
+        await this.sortPoke()
+    }
+    handleSortType = async (e) => {
+        this.setState({sortType: e.target.value})
+        console.log(this.state.sortType);
+        await this.sortPoke()
+    }
+    
     render() {
         return (
             <div>
-                
+                <DropDown 
+                handleSortOrder={this.handleSortOrder}
+                handleSortType={this.handleSortType} 
+                />
+                <SearchBar 
+                handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+                />
+                <PokeList 
+                pokeData={this.state.pokeData}
+                />
+
             </div>
         )
     }

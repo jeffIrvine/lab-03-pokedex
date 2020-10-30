@@ -5,10 +5,10 @@ import {
     Route, 
     Switch,
 } from 'react-router-dom';
-// import ListPage from './ListPage.js';
-import Main from './Main.js';
+// import Main from './Main.js';
 import HomePage from './HomePage.js';
 import Header from './Header.js';
+import ListPage from './ListPage.js';
 
 
 
@@ -27,7 +27,7 @@ export default class App extends Component {
                         <Route 
                             path="/list" 
                             exact
-                            render={(routerProps) => <Main {...routerProps} />} 
+                            render={(routerProps) => <ListPage {...routerProps} />} 
                         />
                     </Switch>
                 </Router>
