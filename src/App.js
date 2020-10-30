@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './App.css';
 import {
     BrowserRouter as Router, 
     Route, 
@@ -6,6 +7,8 @@ import {
 } from 'react-router-dom';
 import ListPage from './ListPage.js';
 import HomePage from './HomePage.js';
+import Header from './Header.js';
+
 
 
 export default class App extends Component {
@@ -14,6 +17,7 @@ export default class App extends Component {
             <div>
                 <Router>
                     <Switch>
+                        <Header />
                         <Route 
                             path="/" 
                             exact

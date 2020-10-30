@@ -1,6 +1,5 @@
 import React from 'react';
-import Header from './Header.js';
-import './App.css';
+
 import PokeList from './PokeList.js';
 import SearchBar from './SearchBar.js';
 import Sort from './Sort.js';
@@ -41,7 +40,7 @@ export default class App extends React.Component {
   render() {
     return (
           <div className="App">
-            <Header />
+            
             <SearchBar 
             handleSubmit={this.handleSubmit}
             handleChange={this.handleChange}
