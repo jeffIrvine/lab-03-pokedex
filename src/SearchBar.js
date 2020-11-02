@@ -9,8 +9,8 @@ export default class SearchBar extends Component {
         // 
         return (
             <div className='search-bar'>
-                <form>
-                    <p> Sort by Pokemon Name 
+                <form onSubmit={this.props.handleSubmit} >
+                    <p> Search Pokedex: 
                         <input className='input' 
                         type='text' 
                         onChange={this.props.handleChange}
