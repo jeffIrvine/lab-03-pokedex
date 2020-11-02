@@ -10,7 +10,9 @@ export default class ListPage extends Component {
         filter: '',
         sortType: '',
         sortOrder: '',
-        pokemon: ''
+        pokemon: '',
+        pageNumber: 1,
+        count: 1
     }
     
     componentDidMount = async () => {
@@ -19,8 +21,11 @@ export default class ListPage extends Component {
     }
 
     fetchPoke = async () => {
-        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.filter}&sort=${this.state.sortType}&direction=${this.state.sortOrder}&perPage=1000`)
-        this.setState({pokeData: response.body.results});
+        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.filter}&sort=${this.state.sortType}&direction=${this.state.sortOrder}&page=${this.state.pageNumber}&perPage=20`)
+        this.setState({
+            pokeData: response.body.results,
+            count: response.body.count
+        });
     }
     
     handleSubmit = async (e) => {
@@ -41,6 +46,17 @@ export default class ListPage extends Component {
         await this.setState({sortType: e.target.value})
         await this.fetchPoke()
     }
+
+    handleIncrement = async () => {
+        await this.setState({
+            pageNumber: this.state.pageNumber + 1})
+            await this.fetchPoke()
+    }
+    handleDecrement = async () => {
+        await this.setState({
+            pageNumber: this.state.pageNumber - 1})
+            await this.fetchPoke()
+    }
     
     render() {
         return (
@@ -53,6 +69,18 @@ export default class ListPage extends Component {
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
                 />
+                <div> 
+                    Page: {this.state.pageNumber} out of {Math.ceil(this.state.count / 20)}
+                </div>
+                <div>
+                    {this.state.count} total pokemon in query
+                </div>
+                { 
+                     <button onClick={this.handleDecrement} disabled={this.state.pageNumber === 1} >Prev</button>
+                }
+                {
+                     <button onClick={this.handleIncrement} disabled={this.state.pageNumber === Math.ceil(this.state.count / 20)} >Next</button>
+                }
 
                 {
                     this.state.pokeData.length === 0 
