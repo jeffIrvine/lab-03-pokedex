@@ -10,7 +10,6 @@ import HomePage from './HomePage.js';
 import Header from './Header.js';
 import ListPage from './ListPage.js';
 import DetailPage from './DetailPage.js';
-import PaginationPage from './PaginationPage.js';
 
 
 
@@ -35,11 +34,6 @@ export default class App extends Component {
                             path="/pokemon/:pokemon" 
                             exact
                             render={(routerProps) => <DetailPage {...routerProps} />} 
-                        />
-                        <Route 
-                            path="/pagination" 
-                            exact
-                            render={(routerProps) => <PaginationPage {...routerProps} />} 
                         />
                     </Switch>
                 </Router>
