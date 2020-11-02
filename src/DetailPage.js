@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import PokeList from './PokeList.js';
 import fetch from 'superagent'
 
-export default class ListPage extends Component {
+export default class DetailPage extends Component {
     state = {
         pokeData: [],
         filter: '',
         sortType: '',
         sortOrder: '',
+        loading: false
     }
     
     componentDidMount = async () => {
@@ -16,20 +17,24 @@ export default class ListPage extends Component {
     }
 
     fetchPoke = async () => {
+        this.setState({loading: true })
 
-        console.log('this.props', this.props.match.params.pokemon);
         const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.props.match.params.pokemon}`)
-        this.setState({pokeData: response.body.results});
+        
+        this.setState({
+            pokeData: response.body.results,
+            loading: false,
+        });
     }
     
     render() {
         return (
             <div>
                 {
-                    this.state.pokeData.length === 0 
+                    this.state.loading 
                     ? <iframe
                     className='spinner'
-                    src="https://i.imgur.com/tZilN49.gif"
+                    src="https://i.gifer.com/9xnj.gif"
                     title={Math.random()}
                     width="500px"
                     height="500px"  
