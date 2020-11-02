@@ -12,7 +12,8 @@ export default class ListPage extends Component {
         sortOrder: '',
         pokemon: '',
         pageNumber: 1,
-        count: 1
+        loading: false,
+        count: 1,
     }
     
     componentDidMount = async () => {
@@ -21,10 +22,14 @@ export default class ListPage extends Component {
     }
 
     fetchPoke = async () => {
+        this.setState({loading: true })
+
         const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.filter}&sort=${this.state.sortType}&direction=${this.state.sortOrder}&page=${this.state.pageNumber}&perPage=20`)
+
         this.setState({
             pokeData: response.body.results,
-            count: response.body.count
+            count: response.body.count,
+            loading: false,
         });
     }
     
@@ -83,7 +88,7 @@ export default class ListPage extends Component {
                 }
 
                 {
-                    this.state.pokeData.length === 0 
+                    this.state.loading 
                     ? <iframe
                     className='spinner'
                     src="https://i.gifer.com/9xnj.gif"
