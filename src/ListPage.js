@@ -9,7 +9,8 @@ export default class ListPage extends Component {
         pokeData: [],
         filter: '',
         sortType: '',
-        sortOrder: ''
+        sortOrder: '',
+        pokemon: ''
     }
     
     componentDidMount = async () => {
@@ -18,15 +19,9 @@ export default class ListPage extends Component {
     }
 
     fetchPoke = async () => {
-        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.filter}&perPage=1000`)
+        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.filter}&sort=${this.state.sortType}&direction=${this.state.sortOrder}&perPage=1000`)
         this.setState({pokeData: response.body.results});
     }
-
-    sortPoke = async () => {
-        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?sort=${this.state.sortType}&direction=${this.state.sortOrder}`)
-        this.setState({pokeData: response.body.results})
-    }
-
     
     handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,16 +30,16 @@ export default class ListPage extends Component {
     
     handleChange = async (e) => {
         await this.setState({filter: e.target.value});
-        await this.sortPoke()
+        await this.fetchPoke()
     }
 
     handleSortOrder = async (e) => {
         await this.setState({sortOrder: e.target.value});
-        await this.sortPoke()
+        await this.fetchPoke()
     }
     handleSortType = async (e) => {
         await this.setState({sortType: e.target.value})
-        await this.sortPoke()
+        await this.fetchPoke()
     }
     
     render() {
@@ -58,10 +53,21 @@ export default class ListPage extends Component {
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
                 />
-                <PokeList 
-                pokeData={this.state.pokeData}
-                />
 
+                {
+                    this.state.pokeData.length === 0 
+                    ? <iframe
+                    className='spinner'
+                    src="https://i.imgur.com/tZilN49.gif"
+                    title={Math.random()}
+                    width="500px"
+                    height="500px"  
+                    frameBorder='0'
+                    allowFullScreen/>
+                    : <PokeList 
+                    pokeData={this.state.pokeData}
+                    />
+                }
             </div>
         )
     }
